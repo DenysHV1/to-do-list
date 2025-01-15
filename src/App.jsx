@@ -9,20 +9,30 @@ function App() {
     return localTasks?.length > 0 ? JSON.parse(localTasks) : [];
   });
 
+  const [editingTask, setEditingTask] = useState(null); // Состояние для редактирования
+
   const getTask = (taskFromForm) => {
-    setTasks((prevTasks) => [...prevTasks, taskFromForm]);
+    if (editingTask) {
+      // Если задача редактируется, обновляем её
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === editingTask.id ? { ...task, task: taskFromForm.task } : task
+        )
+      );
+      setEditingTask(null); // Сбрасываем состояние редактирования
+    } else {
+      // Иначе добавляем новую задачу
+      setTasks((prevTasks) => [...prevTasks, taskFromForm]);
+    }
   };
 
   const handleDeleteTask = (idTask) => {
     setTasks((prevTasks) => prevTasks.filter(({ id }) => idTask !== id));
   };
 
-  const handleEditTask = (idTask, newTask) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === idTask ? { ...task, task: newTask } : task
-      )
-    );
+  const handleEditTask = (idTask) => {
+    const taskToEdit = tasks.find((task) => task.id === idTask);
+    setEditingTask(taskToEdit); // Устанавливаем задачу для редактирования
   };
 
   useEffect(() => {
@@ -32,7 +42,7 @@ function App() {
   return (
     <div className="app">
       <h1>To-Do List</h1>
-      <FormTask getTask={getTask} />
+      <FormTask getTask={getTask} editingTask={editingTask} />
       <TaskList
         onDelete={handleDeleteTask}
         onEdit={handleEditTask}
@@ -42,4 +52,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
