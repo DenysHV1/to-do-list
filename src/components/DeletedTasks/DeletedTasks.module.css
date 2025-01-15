@@ -1,0 +1,51 @@
+.deletedTasks {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .deletedTasks h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .deletedTasks ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .deletedTasks li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .deletedTasks li:last-child {
+    border-bottom: none;
+  }
+  
+  .deletedTasks span {
+    flex: 1;
+    color: #666;
+  }
+  
+  .deletedTasks button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .deletedTasks button:hover {
+    background-color: #218838;
+  }
+  
