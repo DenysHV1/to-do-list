@@ -1,6 +1,7 @@
 {
   "short_name": "To-Do App",
   "name": "To-Do List Application",
+  "id": "/", 
   "icons": [
     {
       "src": "icon-192x192.png",
@@ -11,6 +12,20 @@
       "src": "icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "type": "image/png",
+      "sizes": "1080x1920",
+      "form_factor": "narrow" // Для мобильных устройств
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "type": "image/png",
+      "sizes": "1920x1080",
+      "form_factor": "wide" // Для компьютеров
     }
   ],
   "start_url": ".",

@@ -1,0 +1,26 @@
+.list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff4d4d;
+  }
+  
+  .emptyMessage {
+    text-align: center;
+    color: #666;
+  }
