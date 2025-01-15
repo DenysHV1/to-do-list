@@ -9,13 +9,22 @@ import { v4 as uuidv4 } from "uuid";
 const taskStatuses = ["Начал делать", "Половина", "Отвлёкся", "Почти готова", "Готова"];
 
 function App() {
+  // Загрузка данных из localStorage при инициализации
   const [tasks, setTasks] = useState(() => {
     const localTasks = localStorage.getItem("tasks");
-    return localTasks?.length > 0 ? JSON.parse(localTasks) : [];
+    return localTasks ? JSON.parse(localTasks) : [];
   });
 
-  const [deletedTasks, setDeletedTasks] = useState([]); // Список удаленных задач
-  const [completedTasks, setCompletedTasks] = useState([]); // Список выполненных задач
+  const [deletedTasks, setDeletedTasks] = useState(() => {
+    const localDeletedTasks = localStorage.getItem("deletedTasks");
+    return localDeletedTasks ? JSON.parse(localDeletedTasks) : [];
+  });
+
+  const [completedTasks, setCompletedTasks] = useState(() => {
+    const localCompletedTasks = localStorage.getItem("completedTasks");
+    return localCompletedTasks ? JSON.parse(localCompletedTasks) : [];
+  });
+
   const [editingTaskId, setEditingTaskId] = useState(null); // ID редактируемой задачи
   const [editingText, setEditingText] = useState(""); // Текст редактируемой задачи
 
@@ -23,6 +32,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  useEffect(() => {
+    localStorage.setItem("deletedTasks", JSON.stringify(deletedTasks));
+  }, [deletedTasks]);
+
+  useEffect(() => {
+    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+  }, [completedTasks]);
 
   // Добавление новой задачи
   const getTask = (taskFromForm) => {
