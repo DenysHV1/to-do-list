@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Background from "./components/Background/Background";
 import FormTask from "./components/FormTask/FormTask";
 import TaskList from "./components/TaskList/TaskList";
 import DeletedTasks from "./components/DeletedTasks/DeletedTasks";
@@ -81,6 +82,7 @@ function App() {
 
   return (
     <div className="app">
+      <Background />
       <h1>To-Do List</h1>
       <FormTask getTask={getTask} />
       <div className="tasks-container">
