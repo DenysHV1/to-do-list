@@ -1,6 +1,13 @@
-import styles from './DeletedTasks.module.css';
+import { FC } from "react";
+import { ITask } from "../../App";
+import styles from "./DeletedTasks.module.css";
 
-const DeletedTasks = ({ deletedTasks, onRestore }) => {
+interface IDeletedTasksProps {
+  deletedTasks: ITask[];
+  onRestore: (task: ITask) => void;
+}
+
+const DeletedTasks: FC<IDeletedTasksProps> = ({ deletedTasks, onRestore }) => {
   return (
     <div className={styles.deletedTasks}>
       <h3>Удаленные задачи</h3>

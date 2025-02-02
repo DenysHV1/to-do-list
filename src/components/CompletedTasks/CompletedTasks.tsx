@@ -1,6 +1,12 @@
-import styles from './CompletedTasks.module.css';
+import { FC } from "react";
+import { ICompletedTask } from "../../App";
+import styles from "./CompletedTasks.module.css";
 
-const CompletedTasks = ({ completedTasks }) => {
+interface ICompletedTasksProps {
+  completedTasks: ICompletedTask[];
+}
+
+const CompletedTasks: FC<ICompletedTasksProps> = ({ completedTasks }) => {
   return (
     <div className={styles.completedTasks}>
       <h3>Выполненные задачи</h3>

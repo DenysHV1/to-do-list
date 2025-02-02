@@ -1,7 +1,21 @@
-import { IoClose, IoPencil } from "react-icons/io5";
-import styles from './TaskList.module.css';
+import { IoClose } from "react-icons/io5";
+import styles from "./TaskList.module.css";
+import { ITask } from "../../App";
+import { Dispatch, FC, SetStateAction } from "react";
 
-const TaskList = ({
+interface ITaskListProps {
+  tasks: ITask[];
+  onDelete: (idTask: string) => void;
+  onEdit: (idTask: string, newText: string) => void;
+  onStatusChange: (idTask: string, newStatus: string) => void;
+  editingTaskId: string | null;
+  setEditingTaskId: Dispatch<SetStateAction<string | null>>;
+  editingText: string;
+  setEditingText: Dispatch<SetStateAction<string>>;
+  taskStatuses: string[];
+}
+
+const TaskList: FC<ITaskListProps> = ({
   tasks,
   onDelete,
   onEdit,
@@ -14,7 +28,7 @@ const TaskList = ({
 }) => {
   return (
     <div className={styles.taskList}>
-      {tasks?.length > 0 ? (
+      {tasks.length > 0 ? (
         <ul className={styles.list}>
           {tasks.map(({ task, id, status }) => (
             <li key={id} className={styles.item}>
@@ -24,11 +38,18 @@ const TaskList = ({
                   value={editingText}
                   onChange={(e) => setEditingText(e.target.value)}
                   onBlur={() => onEdit(id, editingText)}
-                  onKeyPress={(e) => e.key === "Enter" && onEdit(id, editingText)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && onEdit(id, editingText)
+                  }
                   autoFocus
                 />
               ) : (
-                <p onClick={() => { setEditingTaskId(id); setEditingText(task); }}>
+                <p
+                  onClick={() => {
+                    setEditingTaskId(id);
+                    setEditingText(task);
+                  }}
+                >
                   {task}
                 </p>
               )}
@@ -43,7 +64,10 @@ const TaskList = ({
                     </option>
                   ))}
                 </select>
-                <button onClick={() => onDelete(id)} className={styles.deleteButton}>
+                <button
+                  onClick={() => onDelete(id)}
+                  className={styles.deleteButton}
+                >
                   <IoClose size={20} />
                 </button>
               </div>
